@@ -4,7 +4,6 @@
     "build": "cross-env NODE_ENV=production vite-ssg build",
     "dev": "vite --port 3333 --open",
     "lint": "eslint \"**/*.{vue,ts,js}\"",
-    "test": "cypress open",
     "preview": "vite preview",
     "preview-https": "serve dist",
     "typecheck": "vue-tsc --noEmit"
