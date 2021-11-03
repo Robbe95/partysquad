@@ -2,9 +2,9 @@
 </script>
 
 <template>
-  <div class="min-h-screen min-w-screen background flex items-center justify-center">
+  <div class="min-h-screen min-w-screen background flex items-center justify-center overflow-hidden">
     <div>
-      <div class="text-20xl text-red-500 text-animation mb-20">
+      <div class="2xl:text-15xl lg:text-10xl text-5xl text-red-500 text-animation mb-20">
         PARTYSQUAD
       </div>
       <div class="text-white text-center">
