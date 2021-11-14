@@ -93,25 +93,80 @@ const ellenAnimation = () => {
     .to('#ellen', { x: 0, y: 0, duration: 1 })
 }
 
+const moveEllen = () => {
+  const moveEllenTimeline = gsap.timeline()
+  moveEllenTimeline
+    .to('#ellen', {
+      x: 1500,
+      y: 1000,
+      duration: 2,
+    },
+    )
+}
+
+const objectsAnimation = () => {
+  let objects = ['#star1', '#star2', '#star3', '#star4', '#star5', '#star6', '#banana', '#fish']
+  objects = objects
+    .map(value => ({ value, sort: Math.random() }))
+    .sort((a, b) => a.sort - b.sort)
+    .map(({ value }) => value)
+  objects.forEach((element, index) => {
+    gsap.from(element, { scale: 0, ease: 'elastic', duration: 1, delay: index * 0.4 + 3 })
+  })
+}
+
+const titleAnimation = () => {
+  gsap.from('#title', { scale: 0, ease: 'elastic', duration: 3, delay: 4 })
+}
+
 const setupAnimations = () => {
   setPositions()
   jorenAnimation()
   ellenAnimation()
+  objectsAnimation()
+  titleAnimation()
+}
+
+const randomOrbit = (element, movement) => {
+  gsap.to(element, {
+    svgOrigin: '10 10',
+    rotate: 360,
+    repeat: -1,
+    ease: 'none',
+    duration: 2,
+  })
+}
+
+const setupOrbit = () => {
+  const minMovement = 200
+  const maxMovement = Math.min(window.innerWidth, window.innerHeight)
+  randomOrbit('#orbit', Math.floor(Math.random() * (400 - 200 + 1) + 0))
 }
 onMounted(() => {
   setupAnimations()
+  // setupOrbit()
 })
 </script>
 
 <template>
-  <div ref="container" class="bg-black h-screen min-w-screen relative overflow-hidden">
-    <div class="flex items-center justify-center w-full h-full absolute">
-      <img class="z-20" src="@/assets/title.png" />
+  <div ref="container" class="bg-black h-screen min-w-screen relative overflow-hidden flex items-center justify-center">
+    <div class="flex items-center justify-center w-full h-full absolute" target="0">
+      <img id="title" class="z-20" src="@/assets/title.png" />
     </div>
 
     <img class="absolute w-full h-full object-cover" src="@/assets/background.png" />
-    <img v-for="i in 20" :id="'cow-' +i" :key="i" class="absolute z-20 cow w-auto -top-2/8 right-0 scale-50" src="@/assets/cow.png" />
+    <img
+      v-for="i in 20"
+      :id="'cow-' +i"
+      :key="i"
+      class="absolute z-0 cow w-auto -top-2/8 right-0 scale-50"
+      target="0"
+      src="@/assets/cow.png"
+    />
 
+    <!-- <div id="orbit" class="orbit z-0 h-80 w-80 mt-80 ml-80">
+      <img class="transform z-" src="@/assets/maarten.png" />
+    </div> -->
     <div id="unicorn-wings" class="absolute bottom-0 left-30 z-20">
       <div class="relative rotate-y-180 transform">
         <img id="unicorn" class="h-180" src="@/assets/unicorn.png" />
@@ -142,12 +197,25 @@ onMounted(() => {
     <div class="absolute bottom-1/2 -left-0 h-80 rotate-90 transform">
       <img id="bierjoren" class="h-full" src="@/assets/bierjoren.png" />
     </div>
+    <img id="fish" class="absolute bottom-1/8 left-1/2" src="@/assets/fish.png" />
 
-    <img id="ellen" class="absolute bottom-1/2 left-1/4" src="@/assets/ellen.png" />
+    <div class="absolute bottom-1/2 left-1/4 hover:scale-110 transition transform cursor-pointer">
+      <img id="ellen" class=" " src="@/assets/ellen.png" @click="moveEllen" />
+    </div>
     <img id="sm" class="absolute bottom-0 right-25 z-10" src="@/assets/sm.png" />
     <div class="absolute bottom-40 right-20 z-0">
-      <img id="leander" src="@/assets/leander.png" />
+      <div class="relative">
+        <img id="leander" class="" src="@/assets/leander.png" />
+        <img id="banana" class="absolute -left-24 top-40 -z-10" src="@/assets/banana.png" />
+      </div>
       <img class="h-8 transform rotate-y-180 absolute top-17 right-28" src="@/assets/tongue.gif" />
+    </div>
+    <div>
+      <img id="star1" class="absolute top-1/6 left-5/12" src="@/assets/star.svg" />
+      <img id="star2" class="absolute top-7/12 left-1/12 transform rotate-54" src="@/assets/star.svg" />
+      <img id="star3" class="absolute top-10/12 left-4/12 transform rotate-34" src="@/assets/star.svg" />
+      <img id="star4" class="absolute top-11/12 left-6/12 transform rotate-170" src="@/assets/star.svg" />
+      <img id="star5" class="absolute top-6/12 left-8/12 transform rotate-120" src="@/assets/star.svg" />
     </div>
   </div>
 </template>
