@@ -142,14 +142,24 @@ const setupOrbit = () => {
   const maxMovement = Math.min(window.innerWidth, window.innerHeight)
   randomOrbit('#orbit', Math.floor(Math.random() * (400 - 200 + 1) + 0))
 }
+
+const loading = ref(true)
 onMounted(() => {
-  setupAnimations()
+  setTimeout(() => {
+    loading.value = false
+
+    setupAnimations()
+  }, 1000)
+
   // setupOrbit()
 })
 </script>
 
 <template>
-  <div ref="container" class="bg-black h-screen min-w-screen relative overflow-hidden flex items-center justify-center">
+  <div v-show="loading">
+    LOADING
+  </div>
+  <div v-show="!loading" ref="container" class="bg-black h-screen min-w-screen relative overflow-hidden flex items-center justify-center">
     <div class="flex items-center justify-center w-full h-full absolute" target="0">
       <img id="title" class="z-20" src="@/assets/title.png" />
     </div>
