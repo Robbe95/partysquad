@@ -1,6 +1,6 @@
 <script setup>
 import gsap from 'gsap'
-import { MotionPathPlugin } from 'gsap/MotionPathPlugin'
+import { MotionPathPlugin } from 'gsap/dist/MotionPathPlugin'
 
 gsap.registerPlugin(MotionPathPlugin)
 
@@ -46,6 +46,8 @@ const removePoop = () => {
 const setPositions = () => {
   gsap.set('#unicorn-wings', { y: '100%' })
   gsap.set('#joren', { x: '-100%' })
+  gsap.set('#bierjoren', { y: '150%' })
+
   gsap.set('#ellen', { x: '-40vw', y: '-40vh' })
   gsap.set('#poop', { y: '-80px', opacity: 0 })
   gsap.set('.bubble', { y: '200%', x: '200%', opacity: 0 })
@@ -55,6 +57,7 @@ const jorenGetsBeer = () => {
   const beerTimeline = gsap.timeline()
   beerTimeline
     .to('#joren', { x: '-100%' })
+    .to('#bierjoren', { y: '25%', duration: 1, delay: 2 })
 }
 
 const jorenAnimation = () => {
@@ -124,9 +127,9 @@ onMounted(() => {
       </div>
     </div>
     <img id="robbe" class="absolute bottom-0 left-0" src="@/assets/robbe.png" />
-    <div class="absolute bottom-1/2 left-0">
-      <div class="transform hover:scale-110 transition cursor-pointer" target="1">
-        <img id="joren" src="@/assets/joren.png" @click="jorenGetsBeer" />
+    <div class="absolute bottom-1/2 left-0 z-10">
+      <div class="transform hover:scale-110 transition" target="1">
+        <img id="joren" src="@/assets/joren.png" class="cursor-pointer" @click="jorenGetsBeer" />
       </div>
       <div class="absolute left-10 -bottom-10">
         <div
@@ -136,6 +139,10 @@ onMounted(() => {
         </div>
       </div>
     </div>
+    <div class="absolute bottom-1/2 -left-0 h-80 rotate-90 transform">
+      <img id="bierjoren" class="h-full" src="@/assets/bierjoren.png" />
+    </div>
+
     <img id="ellen" class="absolute bottom-1/2 left-1/4" src="@/assets/ellen.png" />
     <img id="sm" class="absolute bottom-0 right-25 z-10" src="@/assets/sm.png" />
     <div class="absolute bottom-40 right-20 z-0">
