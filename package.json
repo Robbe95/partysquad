@@ -12,6 +12,7 @@
     "@vueuse/core": "^6.7.4",
     "@vueuse/head": "^0.6.0",
     "gsap": "^3.8.0",
+    "less": "^4.1.2",
     "nprogress": "^0.2.0",
     "pinia": "^2.0.0",
     "prism-theme-vars": "^0.2.2",
